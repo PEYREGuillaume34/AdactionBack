@@ -27,24 +27,24 @@ app.get("/volunteers", async (req, res) => {
     }
 });
 
-// Route pour afficher un bénévole par son id
-app.get("/volunteer/:id", async (req, res) => {
+// // Route pour afficher un bénévole par son id
+// app.get("/volunteer/:id", async (req, res) => {
 
-    const { id } = req.params;
-    // console.log(id);
+//     const { id } = req.params;
+//     // console.log(id);
 
-    try {
-        const result = await sql.query("SELECT * FROM volunteers WHERE id=$1", [id])
-        if (result.rows.length === 0) {
-            throw new Error(res.status(404).json({ Error: "il n'y a pas/plus de volunteer avec cet id" }));
-        }
-        res.json(result.rows);
-    }
-    catch (e) {
-        res.status(500).json({ e: "impossible de recuperer volunteers depuis DB NEON" })
+//     try {
+//         const result = await sql.query("SELECT * FROM volunteers WHERE id=$1", [id])
+//         if (result.rows.length === 0) {
+//             throw new Error(res.status(404).json({ Error: "il n'y a pas/plus de volunteer avec cet id" }));
+//         }
+//         res.json(result.rows);
+//     }
+//     catch (e) {
+//         res.status(500).json({ e: "impossible de recuperer volunteers depuis DB NEON" })
 
-    }
-});
+//     }
+// });
 
 // Route pour créer un bénévole
 app.post("/volunteer", async (req, res) => {
@@ -319,24 +319,7 @@ app.get("/volunteers/:asso", async (req, res) => {
 
     }
 });
-// Route pour afficher un bénévole par son id
 
-app.get("/volunteer/:id", async (req, res) => {
-
-    const { id } = req.params;
-    // console.log(id);
-
-    try {
-        const result = await sql.query("SELECT * FROM volunteers WHERE id=$1", [id])
-        if (result.rows.length === 0) {
-            throw new Error(res.status(404).json({ Error: "il n'y a pas/plus de volunteer avec cet id" }));
-        }
-        res.json(result.rows);
-    }
-    catch (e) {
-        res.status(500).json({ e: "impossible de recuperer volunteers depuis DB NEON" })
-    }
-});
 
 // route pour affichage de l'historique des collectes d'un benevole
 app.get("/collects/volunteer/:id", async (req, res) => {
