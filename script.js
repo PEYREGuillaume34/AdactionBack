@@ -7,8 +7,11 @@ import bcrypt from "bcrypt";
 const { Pool } = pkg;
 dotenv.config();
 const app = express();
-app.use(cors());
-//utilises et reconnais JSON
+app.use(cors({
+    origin: ['https://adaction-front.vercel.app', 'http://localhost:5500', 'http://127.0.0.1:5500'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
 app.use(express.json());
 
 // c'est a ca que tu te connectes pour acceder à la database
@@ -279,11 +282,6 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    // console.log("HELLO SERVER");
-})
-
-
 
 //________________________________________________________________________________
 //Ajouter route vers Collects
@@ -349,4 +347,10 @@ app.get("/collects/volunteer/:id", async (req, res) => {
     catch (e) {
         res.status(500).json({ e: 'impossible de recuperer collects et volunteers infos from DB' })
     }
+});
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
