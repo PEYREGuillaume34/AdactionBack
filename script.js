@@ -7,17 +7,7 @@ import bcrypt from "bcrypt";
 const { Pool } = pkg;
 dotenv.config();
 const app = express();
-app.use(cors({
-    origin: [
-        'https://adaction-front.vercel.app',
-        'https://adaction-front-alpha.vercel.app',
-        'https://adaction-front-peyre-guillaumes-projects.vercel.app',
-        'http://localhost:5500',
-        'http://127.0.0.1:5500'
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-}));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // c'est a ca que tu te connectes pour acceder à la database
